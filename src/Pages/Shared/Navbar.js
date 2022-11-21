@@ -2,10 +2,12 @@ import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import { useDoctor } from "../../Hooks/useDoctor";
 import { Loading } from "./Loading";
 
 export const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [doctor] = useDoctor(user);
   const navigate = useNavigate();
   const logout = () => {
     signOut(auth);
@@ -23,23 +25,21 @@ export const Navbar = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
+      
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/diseases">Diseases</Link>
       </li>
-      <li>
+      {<li>
         <Link to="/appoinment">Appoinment</Link>
-      </li>
-      <li>
-        <Link to="/reviews">Reviews</Link>
-      </li>
-      <li>
-        <Link to="/contact">Contact Us</Link>
-      </li>
+      </li>}
       {user && (
         <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
       )}
+      <li>
+        <Link to="/about">About</Link>
+      </li>
       <li>{user ? <button onClick={logout}>Logout</button> : <Link to="/login">Login</Link>}</li>
     </>
   );
@@ -57,7 +57,7 @@ export const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Doctors Portal
+          Healthcare System
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

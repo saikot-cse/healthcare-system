@@ -6,6 +6,8 @@ import { Services } from './Services'
 import { Testimonials } from './Testimonials'
 import { HomeContact } from './HomeContact'
 import { Footer } from '../Shared/Footer'
+import { HomeDoctor } from './HomeDoctor'
+// import { Doctors } from './Doctors'
 
 
 export const Home = () => {
@@ -15,6 +17,7 @@ export const Home = () => {
       <Info/>
       <Services/>
       <ExtraInfo/>
+      <HomeDoctor/>
       <MakeAppoinment/>
       <Testimonials/>
       <HomeContact />

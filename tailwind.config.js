@@ -13,8 +13,8 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#0FCFEC",
-          secondary: "#19D3AE",
+          primary: "#079eb5",
+          secondary: "#12e3b9",
           neutral: "#3A4256",
           "base-100": "#ffffff",
         },

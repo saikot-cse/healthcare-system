@@ -40,10 +40,11 @@ export const MyAppoinment = () => {
           <thead>
             <tr>
               <th></th>
-              <th>Name</th>
+              <th>SL</th>
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Fee</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +55,7 @@ export const MyAppoinment = () => {
                 <td>{a.date}</td>
                 <td>{a.slot}</td>
                 <td>{a.treatment}</td>
+                <td>{a.fee}</td>
               </tr>
             ))}
           </tbody>

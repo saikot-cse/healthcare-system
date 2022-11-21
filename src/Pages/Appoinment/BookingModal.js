@@ -18,6 +18,7 @@ export const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       patient: user.email,
       patientname: user.displayName,
       phone: e.target.phone.value,
+      fee: 1000,
     };
 
     fetch("https://powerful-gorge-69210.herokuapp.com/booking", {

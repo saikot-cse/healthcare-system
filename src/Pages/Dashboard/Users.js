@@ -9,7 +9,7 @@ export const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("https://powerful-gorge-69210.herokuapp.com/user", {
+    fetch("http://localhost:5000/user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -27,13 +27,13 @@ export const Users = () => {
           <thead>
             <tr>
               <th>Email</th>
-              <th>IsAdmin</th>
+              <th>IsDoctor</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <UserRow key={user._id} user={user} refetch={refetch}></UserRow>
+            {users?.map((user) => (
+              <UserRow key={user?._id} user={user} refetch={refetch}></UserRow>
             ))}
           </tbody>
         </table>

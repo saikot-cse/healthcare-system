@@ -1,13 +1,11 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { useQuery } from 'react-query';
+
 import { toast } from 'react-toastify';
-import { Loading } from '../Shared/Loading';
+// import { Loading } from '../Shared/Loading';
 
-export const AddDoctor = () => {
+export const AddDisease = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-
-    const { data: services, isLoading } = useQuery('services', () => fetch('http://localhost:5000/service').then(res => res.json()))
 
     const imageStorageKey='4295ac4d47b569312bea67b440cdbdbb';
 
@@ -26,30 +24,29 @@ export const AddDoctor = () => {
         .then(result =>{
             if(result.success){
                 const img = result.data.url;
-                const doctor = {
+                const disease = {
                     name: data.name,
-                    email: data.email,
-                    designation: data.designation,
-                    specialty: data.specialty,
+                    details: data.details,
+                    symptoms: data.symptoms,
                     img: img
                 }
                 // send to your database 
-                fetch('http://localhost:5000/doctor', {
+                fetch('http://localhost:5000/diseases', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(doctor)
+                    body: JSON.stringify(disease)
                 })
                 .then(res =>res.json())
                 .then(inserted =>{
                     if(inserted.insertedId){
-                        toast.success('Doctor added successfully')
+                        toast.success('Disease added successfully')
                         reset();
                     }
                     else{
-                        toast.error('Failed to add the doctor');
+                        toast.error('Failed to add the Disease');
                     }
                 })
 
@@ -58,13 +55,13 @@ export const AddDoctor = () => {
         })
     }
 
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    // if (isLoading) {
+    //     return <Loading></Loading>
+    // }
 
     return (
         <div>
-            <h2 className="text-2xl">Add a New Doctor</h2>
+            <h2 className="text-2xl">Add a New Disease</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="form-control w-full max-w-xs">
@@ -87,62 +84,9 @@ export const AddDoctor = () => {
                     </label>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Email</span>
-                    </label>
-                    <input
-                        type="email"
-                        placeholder="Your Email"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("email", {
-                            required: {
-                                value: true,
-                                message: 'Email is Required'
-                            },
-                            pattern: {
-                                value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                                message: 'Provide a valid Email'
-                            }
-                        })}
-                    />
-                    <label className="label">
-                        {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                        {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                    </label>
-                </div>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Designation</span>
-                    </label>
-                    <input
-                        type="text"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("designation", {
-                            required: {
-                                value: true,
-                                message: 'Designation is Required'
-                            }
-                        })}
-                    />
-                    <label className="label">
-                        {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
-                    </label>
-                </div>
+                
 
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Specialty</span>
-                    </label>
-                    <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
-                        {
-                            services.map(service => <option
-                                key={service._id}
-                                value={service.name}
-                            >{service.name}</option>)
-                        }
-                    </select>
-                </div>
+                
 
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
@@ -155,6 +99,42 @@ export const AddDoctor = () => {
                             required: {
                                 value: true,
                                 message: 'Image is Required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                    </label>
+                </div>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Disease Details</span>
+                    </label>
+                    <textarea
+                        type="text"
+                        className="input input-bordered w-full max-w-xs h-32"
+                        {...register("details", {
+                            required: {
+                                value: true,
+                                message: 'details is Required'
+                            },
+                        })}
+                    />
+                    <label className="label">
+                        {errors.text?.type === 'required' && <span className="label-text-alt text-red-500">{errors.text.message}</span>}
+                    </label>
+                </div>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Symptoms</span>
+                    </label>
+                    <textarea
+                        type="text"
+                        className="input input-bordered w-full max-w-xs h-16"
+                        {...register("symptoms", {
+                            required: {
+                                value: true,
+                                message: 'Symptoms is Required'
                             }
                         })}
                     />
