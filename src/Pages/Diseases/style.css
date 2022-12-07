@@ -1,0 +1,26 @@
+
+.slider__row__main__search {
+  margin: auto;
+  min-width: 360px;
+}
+
+.slider__row__main__search__input {
+  border: 0;
+  width: 30%;
+  font-size: 1rem;
+  margin: auto;
+  display: inline;
+}
+
+.slider__row__main__search__input__box {
+  padding: 15px 12px;
+  padding-bottom: 12px;
+  border-radius: 5px;
+  border: 0;
+  font-size: 1rem;
+  width: 30%;
+  background-color: rgb(245, 245, 245);
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}

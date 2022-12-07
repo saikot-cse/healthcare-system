@@ -11,7 +11,7 @@ export const MyAppoinment = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://powerful-gorge-69210.herokuapp.com/booking?patient=${user.email}`, {
+      fetch(`http://localhost:5000/booking?patient=${user.email}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -44,6 +44,7 @@ export const MyAppoinment = () => {
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Doctor</th>
               <th>Fee</th>
             </tr>
           </thead>
@@ -55,6 +56,7 @@ export const MyAppoinment = () => {
                 <td>{a.date}</td>
                 <td>{a.slot}</td>
                 <td>{a.treatment}</td>
+                <td>{a.doctor}</td>
                 <td>{a.fee}</td>
               </tr>
             ))}

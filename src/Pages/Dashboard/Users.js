@@ -27,7 +27,8 @@ export const Users = () => {
           <thead>
             <tr>
               <th>Email</th>
-              <th>IsDoctor</th>
+              <th>Doctor</th>
+              <th>Patient</th>
               <th>Remove</th>
             </tr>
           </thead>

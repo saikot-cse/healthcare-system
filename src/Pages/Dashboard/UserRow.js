@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 export const UserRow = ({ user, refetch }) => {
-  
   const [isDelete, setIsDelete] = useState(false);
   const { email, role } = user;
   const makeDoctor = () => {
@@ -27,7 +26,7 @@ export const UserRow = ({ user, refetch }) => {
   };
   const handleDelete = (email) => {
     console.log(email);
-    
+
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
       fetch(`http://localhost:5000/user/${email}`, {
@@ -36,14 +35,13 @@ export const UserRow = ({ user, refetch }) => {
           "content-type": "application/json",
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
-
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
             alert("Deleted Successfully");
             refetch();
-            setIsDelete(!isDelete)
+            setIsDelete(!isDelete);
           }
         });
     }
@@ -51,15 +49,18 @@ export const UserRow = ({ user, refetch }) => {
   return (
     <tr>
       <td>{email}</td>
+      <td>{role === "doctor" && <p className="bg-green-300 rounded-md px-2">Doctor</p>  }</td>
       <td>
-        {role !== "doctor" && (
+        {role !== "doctor" && role !== "admin" &&  (
           <button onClick={makeDoctor} className="btn btn-xs">
             Make Doctor
           </button>
         )}
       </td>
       <td>
-      <button className="btn btn-xs bg-red-700" onClick={()=>handleDelete(user?.email)}>Remove User</button>
+        {role !== "admin" && <button className="btn btn-xs bg-red-700" onClick={() => handleDelete(user?.email)}>
+          Remove User
+        </button>}
       </td>
     </tr>
   );

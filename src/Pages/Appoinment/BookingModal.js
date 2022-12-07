@@ -3,25 +3,30 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
-export const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
+
+export const BookingModal = ({ treatment, date, setTreatment, refetch , doctor }) => {
+  console.log("doctor", doctor); 
   const [user] = useAuthState(auth);
   const { _id, name, slots } = treatment;
   const formatedDate = format(date, "PP");
+  
   const handleBooking = (e) => {
     e.preventDefault();
     const slot = e.target.slot.value;
+    const doctor = e.target.doctor.value;
     const booking = {
       treatmentId: _id,
       treatment: name,
       date: formatedDate,
       slot,
+      doctor,
       patient: user.email,
       patientname: user.displayName,
       phone: e.target.phone.value,
       fee: 1000,
     };
-
-    fetch("https://powerful-gorge-69210.herokuapp.com/booking", {
+    
+    fetch("http://localhost:5000/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,7 +43,10 @@ export const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
         refetch();
         setTreatment(null);
       });
+
+      
   };
+  
 
   return (
     <div>
@@ -51,6 +59,13 @@ export const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
           <h3 className="font-bold text-2xl text-secondary text-center mb-5">Booking for: {name}</h3>
           <form onSubmit={handleBooking} className="grid grid-cols-1 gap-3 justify-items-center">
             <input type="text" value={format(date, "PP")} readOnly disabled className="input input-bordered input-secondary w-full max-w-xs" />
+            <select name="doctor" className="select select-secondary w-full max-w-xs">
+              {doctor?.map((doc) => (
+                <option key={doc?._id} value={doc.name}>
+                  {doc.name}
+                </option>
+              ))}
+            </select>
             <select name="slot" className="select select-secondary w-full max-w-xs">
               {slots.map((slot) => (
                 <option key={slot} value={slot}>
