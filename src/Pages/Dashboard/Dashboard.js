@@ -27,7 +27,7 @@ export const Dashboard = () => {
             </li>
           )}
           <li>
-            <Link to="/dashboard/review">My Review</Link>
+            <Link to="/dashboard/addReview">Add Review</Link>
           </li>
 
           {admin && (

@@ -8,12 +8,12 @@ import { Appoinment } from "./Pages/Appoinment/Appoinment";
 // import { Contact } from "./Pages/Contact/Contact";
 import { AddDisease } from "./Pages/Dashboard/AddDisease";
 import { AddDoctor } from "./Pages/Dashboard/AddDoctor";
+import { AddReview } from "./Pages/Dashboard/AddReview";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { ManageDisease } from "./Pages/Dashboard/ManageDisease";
 import { ManageDoctors } from "./Pages/Dashboard/ManageDoctors";
 import { MyAppoinment } from "./Pages/Dashboard/MyAppoinment";
 import { MyProfile } from "./Pages/Dashboard/MyProfile";
-import { MyReview } from "./Pages/Dashboard/MyReview";
 import { Users } from "./Pages/Dashboard/Users";
 import { Diseases } from "./Pages/Diseases/Diseases";
 import { Home } from "./Pages/Home/Home";
@@ -61,7 +61,7 @@ function App() {
           />
           <Route index  element={<MyProfile />} />
           <Route path="appoinment" element={<MyAppoinment />} />
-          <Route path="review" element={<MyReview />} />
+          <Route path="addReview" element={<AddReview />} />
           
           {/* <Route path="add" element={<AddDoctor />} />
           <Route path="doctors" element={<ManageDoctors />} />
