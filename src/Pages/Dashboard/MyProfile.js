@@ -8,7 +8,7 @@ export const MyProfile = () => {
   const [user, loading] = useAuthState(auth);
   const [newUser, setNewUser] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/user?email=${user?.email}`, {
+    fetch(`http://localhost:5000/user/${user?.email}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -19,11 +19,11 @@ export const MyProfile = () => {
       .then((data) => {
         setNewUser(data);
       });
-  }, [user]);
+  }, [newUser]);
   // if (loading) {
   //   return <Loading></Loading>;
   // }
-  console.log(newUser[0]);
+  console.log(newUser);
 
   const handleProfile = (event) => {
     event.preventDefault();
@@ -71,10 +71,10 @@ export const MyProfile = () => {
       <div className="mx-auto">
         <h2 className="card-title">Name : {user?.displayName}</h2>
         <h2 className="card-title">Email : {user?.email}</h2>
-        <h2 className="card-title">Phone : {newUser[0]?.phone}</h2>
-        <h2 className="card-title">Address : {newUser[0]?.location}</h2>
-        <h2 className="card-title">Education : {newUser[0]?.education}</h2>
-        <h2 className="card-title">Link : {newUser[0]?.link}</h2>
+        <h2 className="card-title">Phone : {newUser?.phone}</h2>
+        <h2 className="card-title">Address : {newUser?.location}</h2>
+        <h2 className="card-title">Education : {newUser?.education}</h2>
+        <h2 className="card-title">Link : {newUser?.link}</h2>
       </div>
 
       <div className="card  bg-base-100  flex justify-center items-center mt-16">
