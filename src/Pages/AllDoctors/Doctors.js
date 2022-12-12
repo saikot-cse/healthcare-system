@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Doctor } from "./Doctor";
-import stethoscope from "../../assets/icons/stethoscope.png";
 export const Doctors = () => {
   const [doctor, setDocrtor] = useState();
   const [filteredItems, setFilteredItems] = useState([]);
@@ -29,7 +28,7 @@ export const Doctors = () => {
   };
   return (
     <div>
-      <h3 className="text-primary text-center text-xl font-bold">Diseases</h3>
+      <h3 className="text-primary text-center text-xl font-bold">All Doctors</h3>
       <div className="slider__row__main__search">
         <div className="slider__row__main__search__input">
           <input

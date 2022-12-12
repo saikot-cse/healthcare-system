@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useDoctor } from "../../Hooks/useDoctor";
 import { Loading } from "./Loading";
-
+import logo from "../../assets/images/logo.png"
 export const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
   const [doctor] = useDoctor(user);
@@ -56,8 +56,8 @@ export const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Healthcare System
+        <Link to="/">
+          <img src={logo} alt="logo" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

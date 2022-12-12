@@ -21,10 +21,10 @@ export const AddReview = () => {
         .then(result =>{
             if(result.success){
                 const img = result.data.url;
-                const disease = {
+                const review = {
                     name: data.name,
                     details: data.details,
-                    symptoms: data.symptoms,
+                    ratings: data.ratings,
                     img: img
                 }
                 // send to your database 
@@ -34,7 +34,7 @@ export const AddReview = () => {
                         'content-type': 'application/json',
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     },
-                    body: JSON.stringify(disease)
+                    body: JSON.stringify(review)
                 })
                 .then(res =>res.json())
                 .then(inserted =>{
@@ -123,10 +123,10 @@ export const AddReview = () => {
                     <textarea
                         type="text"
                         className="input input-bordered w-full max-w-xs h-16"
-                        {...register("symptoms", {
+                        {...register("ratings", {
                             required: {
                                 value: true,
-                                message: 'Symptoms is Required'
+                                message: 'Ratings is Required'
                             }
                         })}
                     />

@@ -1,45 +1,41 @@
-import quote from "../../assets/icons/quote.svg";
-import prople1 from '../../assets/images/people1.png';
-import prople2 from '../../assets/images/people2.png';
-import prople3 from '../../assets/images/people3.png';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Reviews } from "./Reviews";
+import { PrimaryButton } from '../Shared/PrimaryButton';
 export const Testimonials = () => {
-  const reviews = [
-    {
-      _id: 1,
-      name: "Will Smith",
-      review: "It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content",
-      image: prople1,
-    },
-    {
-      _id: 2,
-      name: "Princess Diana",
-      review: "It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content",
-      image: prople2,
-    },
-    {
-      _id: 3,
-      name: "Wanda",
-      review: "It is a long established fact that by the readable content of a lot layout. The point of using Lorem a more-or-less normal distribu to using Content here, content",
-      image: prople3,
-    },
-  ];
+  const [review, setReview] = useState();
+  useEffect(() => {
+    fetch("http://localhost:5000/reviews", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setReview(data));
+  }, []);
   return (
-    <div>
+    <div className="mb-48">
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-primary text-xl font-bold">Testimonial</h3>
-          <h2 className="text-3xl font-bold">What Our Patients Says</h2>
+          <h2 className="text-3xl font-bold">Our Patients Reviews</h2>
         </div>
-        <div>
-          <img className="w-24 lg:w-48" src={quote} alt="" />
-        </div>
+        {/* <div>
+          <img className="w-24 lg:w-48" src={stethoscope} alt="" />
+        </div> */}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-5 mt-12">
-        {
-          reviews.map(review=><Reviews key={review._id} review={review}/>)
-        }
+        {review?.slice(0, 3).map((review) => (
+          <Reviews index={1} key={review?._id} review={review} />
+        ))}
       </div>
+      <Link to="/allReviews">
+        <div className="text-center my-5">
+          <PrimaryButton>See All Reviews</PrimaryButton>
+        </div>
+      </Link>
     </div>
   );
 };

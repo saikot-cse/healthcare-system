@@ -1,4 +1,6 @@
-export const Reviews = ({ review }) => {
+import React from 'react'
+
+export const Review = ({ review }) => {
   return (
     <div className="card max-w-lg bg-base-100 shadow-xl">
       <div className="card-body">
@@ -14,5 +16,5 @@ export const Reviews = ({ review }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

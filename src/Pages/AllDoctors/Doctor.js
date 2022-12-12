@@ -2,7 +2,7 @@ export const Doctor = ({ doctor }) => {
   return (
   <div className="card w-96 h-full bg-base-100 shadow-xl ">
       <figure>
-        <img className="object-fill w-full h-[300px]" src={doctor?.img} alt="disease" />
+        <img className="object-fill w-full h-[300px]" src={doctor?.img} alt="doctor" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">

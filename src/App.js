@@ -22,6 +22,7 @@ import { RequireAdmin } from "./Pages/Login/RequireAdmin";
 import { RequireAuth } from "./Pages/Login/RequireAuth";
 import { SignUp } from "./Pages/Login/SignUp";
 import { Notfound } from "./Pages/NotFound/Notfound";
+import { Reviews } from "./Pages/Reviews/Reviews";
 // import { Reviews } from "./Pages/Reviews/Reviews";
 import { Navbar } from "./Pages/Shared/Navbar";
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="diseases" element={<Diseases />} />
         <Route path="allDoctors" element={<Doctors />} />
+        <Route path="allReviews" element={<Reviews />} />
         <Route
           path="Appoinment"
           element={
